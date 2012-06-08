@@ -59,7 +59,7 @@ do
       response_fn,
       error_formatter_fn
     )
-    local err, msg = call(
+    local err, msg, code = call(
         error_formatter_fn,
         tostring(err_info) or "(error message is not a string)",
         api_context
@@ -73,7 +73,7 @@ do
       log_error(message)
       error(message)
     end
-    return call(response_fn, err, msg)
+    return call(response_fn, err, msg, code)
   end
 
   -- static --------------------------------------------------------------------
@@ -129,6 +129,7 @@ do
 
       local input, err = call(input_loader, api_context)
       if not input then
+        log_error("failed on url:", api_context:request_path_info())
         return respond_and_clean_context(api_context, err, response_fn, error_formatter_fn)
       end
 
@@ -192,6 +193,7 @@ do
 
       local input, err = call(input_loader, api_context)
       if not input then
+        log_error("failed on url:", api_context:request_path_info())
         return respond_and_clean_context(api_context, err, response_fn, error_formatter_fn)
       end
 
@@ -284,6 +286,7 @@ do
 
       local input, err = call(input_loader, api_context)
       if not input then
+        log_error("failed on url:", api_context:request_path_info())
         return respond_and_clean_context(
             api_context,
             err,

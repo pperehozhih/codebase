@@ -42,7 +42,7 @@ local common_html_error = function(error_id)
       "string", error_id
     )
 
-  return '<H1>Error!</H1>' .. error_id -- TODO: Cache results?
+  return '<H1>Error!</H1>' .. error_id, {}, 500 -- TODO: Cache results?
 end
 
 local common_text_error = function(error_id)
@@ -50,7 +50,7 @@ local common_text_error = function(error_id)
       "string", error_id
     )
 
-  return 'Error!\n\n' .. error_id -- TODO: Cache results?
+  return 'Error!\n\n' .. error_id, {}, 500 -- TODO: Cache results?
 end
 
 -- Note that error_id is intentionally not escaped.
@@ -60,7 +60,7 @@ local common_xml_error = function(error_id)
       "string", error_id
     )
 
-  return '<error id="' .. error_id .. '"/>' -- TODO: Cache results?
+  return '<error id="' .. error_id .. '"/>', {}, 500 -- TODO: Cache results?
 end
 
 -- Note that error_id is intentionally not escaped.
@@ -70,7 +70,7 @@ local common_json_error = function(error_id)
       "string", error_id
     )
 
-  return '{ "error" : { "id" : "' .. error_id .. '" } }' -- TODO: Cache results?
+  return '{ "error" : { "id" : "' .. error_id .. '" } }', {}, 500 -- TODO: Cache results?
 end
 
 local common_luabins_error = function(error_id)
